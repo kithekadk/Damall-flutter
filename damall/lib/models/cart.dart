@@ -13,7 +13,7 @@ class CartItem {
 }
 
 class Cart with ChangeNotifier {
-  final Map<String, CartItem> _items = {};
+  late Map<String, CartItem> _items = {};
   Map<String, CartItem> get items {
     return {..._items};
   }
@@ -31,6 +31,42 @@ class Cart with ChangeNotifier {
               name: existingCartItem.name,
               quantity: existingCartItem.quantity + 1,
               price: existingCartItem.price));
+    } else {
+      _items.putIfAbsent(
+          productid,
+          () => CartItem(
+              id: DateTime.now().toString(),
+              name: name,
+              quantity: 1,
+              price: price));
     }
+
+    notifyListeners();
+  }
+
+  void deleteFromCart(String id) {
+    _items.remove(id);
+    notifyListeners();
+  }
+
+  void removeSingleItem(String id) {
+    if (!_items.containsKey(id)) {
+      return;
+    }
+    if (_items[id]!.quantity > 1) {
+      _items.update(
+          id,
+          (existingCartItem) => CartItem(
+              id: DateTime.now().toString(),
+              name: existingCartItem.name,
+              quantity: existingCartItem.quantity - 1,
+              price: existingCartItem.price));
+    }
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _items = {};
+    notifyListeners();
   }
 }

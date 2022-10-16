@@ -1,3 +1,4 @@
+import 'package:damall/models/cart.dart';
 import 'package:damall/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider.value(value: Products())],
+      providers: [
+        ChangeNotifierProvider.value(value: Products()),
+        ChangeNotifierProvider.value(value: Cart())
+      ],
       child: MaterialApp(
           title: 'Da-mall app',
           theme: ThemeData(
