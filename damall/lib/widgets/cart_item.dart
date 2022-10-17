@@ -1,4 +1,6 @@
+import 'package:damall/models/cart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CartProduct extends StatelessWidget {
   final String id;
@@ -16,16 +18,24 @@ class CartProduct extends StatelessWidget {
       super.key});
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: CircleAvatar(
-          child: FittedBox(
-            child: Text('\$ $price'),
+    return Dismissible(
+      key: ValueKey(id),
+      direction: DismissDirection.endToStart,
+      background: Container(color: Colors.red),
+      onDismissed: (direction) {
+        Provider.of<Cart>(context).removeSingleItem(productid);
+      },
+      child: Card(
+        child: ListTile(
+          leading: CircleAvatar(
+            child: FittedBox(
+              child: Text('\$ $price'),
+            ),
           ),
+          title: Text(name),
+          subtitle: Text('Total:\$${(price * quantity)}'),
+          trailing: Text('Quantity: $quantity'),
         ),
-        title: Text(name),
-        subtitle: Text('Total:\$${(price * quantity)}'),
-        trailing: Text('x \$quantity'),
       ),
     );
   }

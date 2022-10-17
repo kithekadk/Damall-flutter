@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "532383457916",
+    "project_id": "damall-e-commerce",
+    "storage_bucket": "damall-e-commerce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532383457916:android:1d5d7f34cdd8d8fcac1ff9",
+        "android_client_info": {
+          "package_name": "com.example.damall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532383457916-vcc5v11s8og675hlubp0v65ur8vko1sn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA44uRtMs5C0Do0VOHqEldn6S7-kAXTbws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "532383457916-vcc5v11s8og675hlubp0v65ur8vko1sn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

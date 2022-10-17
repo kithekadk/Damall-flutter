@@ -1,3 +1,4 @@
+import 'package:damall/models/cart.dart';
 import 'package:flutter/material.dart';
 import '../models/products.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);
+    final cart = Provider.of<Cart>(context);
     return GestureDetector(
       onTap: () {
         Navigator.of(context)
@@ -21,10 +23,16 @@ class ProductItem extends StatelessWidget {
         child: GridTile(
           footer: GridTileBar(
             title: Text(name),
-            trailing: const IconButton(
-              icon: Icon(Icons.shopping_cart),
-              onPressed: null,
-            ),
+            trailing: IconButton(
+                icon: const Icon(Icons.shopping_cart),
+                onPressed: () {
+                  const snackBar = SnackBar(
+                      duration: Duration(seconds: 3),
+                      backgroundColor: Colors.teal,
+                      content: Text('Product added to cart'));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  cart.addItemtoCart(product.id, product.name, product.price);
+                }),
             backgroundColor: Colors.black87,
           ),
           child: Image.network(imageurl),

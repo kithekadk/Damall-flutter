@@ -1,3 +1,4 @@
+import 'package:damall/models/cart.dart';
 import 'package:flutter/material.dart';
 import '../models/products.dart';
 import 'package:provider/provider.dart';
@@ -9,12 +10,13 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final productid = ModalRoute.of(context)!.settings.arguments as String;
     final loadedProduct = Provider.of<Products>(context).findById(productid);
+    final cart = Provider.of<Cart>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(loadedProduct.name),
         ),
         body: Column(children: [
-          Container(
+          SizedBox(
               height: 300,
               width: double.infinity,
               child: Padding(
@@ -27,8 +29,10 @@ class DetailPage extends StatelessWidget {
             child: Text(loadedProduct.description),
           )
         ]),
-        floatingActionButton: const FloatingActionButton(
-            onPressed: null,
-            child: Icon(Icons.shopping_cart, size: 30, color: Colors.black)));
+        floatingActionButton: FloatingActionButton(
+            onPressed: () => cart.addItemtoCart(
+                loadedProduct.id, loadedProduct.name, loadedProduct.price),
+            child: const Icon(Icons.shopping_cart,
+                size: 30, color: Colors.black)));
   }
 }
